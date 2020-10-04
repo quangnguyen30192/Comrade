@@ -56,13 +56,15 @@ Also, the file write action (`:w`) will be taken over by the IDE to avoid conten
 
 ### Enabling in Nvim
 
-To enable automatically when nvim is opened, set:
+To enable automatically when nvim is opened, set in your config:
 
     let g:comrade_enabled = v:true
 
-, in your config. To start at will, use:
 
-    :ComradeInit
+To start at will, use:
+
+    :ComradeEnable
+
 
 ### Completion
 

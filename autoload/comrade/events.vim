@@ -3,8 +3,7 @@
 " License: GPLv3
 "=============================================================================
 
-
-function! comrade#events#Init() abort
+function! comrade#events#Enable() abort
     augroup ComradeEvents
         autocmd!
 
