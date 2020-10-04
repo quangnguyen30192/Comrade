@@ -19,7 +19,7 @@ IDE to make this work.
 ## Screenshots
 
  ![Flutter in Android Studio](https://github.com/beeender/ComradeNeovim/blob/master/screenshot/android_studio_flutter.gif)
- 
+
 ## Install
 
 **Note: Comrade requires Neovim (0.3.2+) with Python3.6.1+enabled.**
@@ -53,6 +53,16 @@ You would be able to see changes made in one window (either IDE or neovim) appea
 other in a short time.
 
 Also, the file write action (`:w`) will be taken over by the IDE to avoid content conflicts.
+
+### Enabling in Nvim
+
+To enable automatically when nvim is opened, set:
+
+    let g:comrade_enabled = v:true
+
+, in your config. To start at will, use:
+
+    :ComradeInit
 
 ### Completion
 
