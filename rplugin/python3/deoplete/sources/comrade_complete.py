@@ -11,9 +11,9 @@ class Source(Base):
         Base.__init__(self, vim)
 
         self.name = 'Comrade'
-        self.mark = '[Cde]'
+        self.mark = '[IntelliJ]'
         self.filetypes = []
-        self.rank = 500
+        self.rank = 999
         self.max_pattern_length = 100
         self.min_pattern_length = 1
         # Just put all possible patterns here. Category them when we have a
@@ -31,7 +31,7 @@ class Source(Base):
         win = self.vim.current.window
 
         row = win.cursor[0] - 1
-        col = win.cursor[1]
+        col = win.cursor[1] - 1
         ret = {
             "buf_id": buf_id,
             "buf_name": buf_name,
