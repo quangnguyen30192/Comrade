@@ -24,6 +24,7 @@ function! s:ComradeEnable() abort
   execute 'py3file' s:init_path
 
   call comrade#events#Enable()
+  call comrade#events#RegisterAutoImportOnCompletionDone()
   echomsg "Comrade: ON"
 endfunction
 " Start on vim startup if g:comrade_enabled was set
