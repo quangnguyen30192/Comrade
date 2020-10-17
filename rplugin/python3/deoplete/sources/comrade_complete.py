@@ -12,7 +12,7 @@ class Source(Base):
 
         self.name = 'Comrade'
         self.mark = '[IntelliJ]'
-        self.filetypes = []
+        self.filetypes = ['kotlin', 'java']
         self.rank = 999
         self.max_pattern_length = 100
         self.min_pattern_length = 1
@@ -23,6 +23,7 @@ class Source(Base):
                               r'(::)\w*|'
                               r'(->)\w*')
         self.is_debug_enabled = True
+        self.dup = True
 
     def gather_candidates(self, context):
         buf_id = context["bufnr"]
@@ -38,7 +39,8 @@ class Source(Base):
             "buf_changedtick": buf_changedtick,
             "row": row,
             "col": col,
-            "new_request": not context["is_async"]}
+            "new_request": not context["is_async"]
+        }
         results = self.vim.call("comrade#RequestCompletion", buf_id, ret)
 
         if results:
