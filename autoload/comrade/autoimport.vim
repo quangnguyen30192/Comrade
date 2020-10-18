@@ -1,26 +1,32 @@
-function! comrade#autoimport#CompletionDone() abort
-  if !has_key(v:completed_item, 'abbr')
-    return
-  endif
+function! comrade#autoimport#OnCompletionDone() abort
+  " assume the completed item has 'abbr' = 'Repository (org.springframework.stereotype)', and 'word' = 'Repository'
+  let importInfo = get(v:completed_item, 'abbr', '')
+  let candidate = get(v:completed_item, 'word', '')
 
-  let importLine = s:ParseImportLine()
-  if !empty(l:importLine) && !search(l:importLine, 'n')
+  let package = s:ExtractPackage(l:importInfo)
+
+  let importLine = printf('import %s.%s', l:package, l:candidate)
+  if !empty(l:importLine) && !search(l:importLine, 'np')
     call appendbufline(bufnr(), 2, l:importLine)
   endif
 endfunction
 
-function! s:ParseImportLine() abort
-  let importInfo = v:completed_item['abbr']
-
-  let indexOfStartParentheses = stridx(l:importInfo, '(')
+" To get 'org.springframework.stereotype' from 'Repository (org.springframework.stereotype)'
+function! s:ExtractPackage(importInfo) abort
+  let indexOfStartParentheses = stridx(a:importInfo, '(')
   if indexOfStartParentheses == -1
     return ''
   endif
-  let indexOfEndParentheses = stridx(l:importInfo, ')')
+  let indexOfEndParentheses = stridx(a:importInfo, ')')
   if indexOfEndParentheses == -1
     return ''
   endif
 
-  let packageOfImport = strpart(l:importInfo, l:indexOfStartParentheses + 1, indexOfEndParentheses - indexOfStartParentheses - 1)
-  return printf('import %s.%s', l:packageOfImport, v:completed_item['word'])
+  " Get index of 'o' after '(' in 'Repository (org.springframework.stereotype)'
+  let indexOfPackageBegin = l:indexOfStartParentheses + 1
+
+  " Get the length of 'org.springframework.stereotype'
+  let lengthOfPackageString = l:indexOfEndParentheses - l:indexOfStartParentheses - 1
+
+  return strpart(a:importInfo, l:indexOfPackageBegin, l:lengthOfPackageString)
 endfunction
