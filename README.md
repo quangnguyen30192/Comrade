@@ -54,6 +54,8 @@ other in a short time.
 
 Also, the file write action (`:w`) will be taken over by the IDE to avoid content conflicts.
 
+`:e` or `:e!` will help to manual refresh IntelliJ inspections
+
 ### Enabling in Nvim
 
 To enable automatically when nvim is opened, set in your config:
