@@ -25,6 +25,12 @@ function! s:ComradeEnable() abort
 
   call comrade#events#Enable()
   call comrade#events#RegisterAutoImportOnCompletionDone()
+
+  " Command definitions on Enable
+  command! ComradeFix call comrade#fixer#FixAtCursor()
+  command! ComradeNextInsight call comrade#insight_jump#Jump("after")
+  command! ComradePrevInsight call comrade#insight_jump#Jump("before")
+
   echomsg "Comrade: ON"
 endfunction
 " Start on vim startup if g:comrade_enabled was set
@@ -32,7 +38,5 @@ if g:comrade_enabled
   call <SID>ComradeEnable()
 endif
 
-" Command definitions
 " Start at will
 command! ComradeEnable call <SID>ComradeEnable()
-command! ComradeFix call comrade#fixer#FixAtCursor()
