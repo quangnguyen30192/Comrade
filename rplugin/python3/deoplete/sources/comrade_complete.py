@@ -16,6 +16,8 @@ class Source(Base):
         self.rank = 999
         self.max_pattern_length = 100
         self.min_pattern_length = 1
+        self.max_abbr_width = 300
+        self.max_menu_width = 300
         # Just put all possible patterns here. Category them when we have a
         # performance issue.
         self.input_pattern = (r'(\.)\w*|'
