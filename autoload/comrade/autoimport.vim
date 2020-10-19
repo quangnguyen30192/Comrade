@@ -34,7 +34,7 @@ function! s:ExtractPackage(importInfo) abort
   let package = strpart(a:importInfo, l:indexOfPackageBegin, l:lengthOfPackageString)
 
   " match either 'org.springframework.stereotype' or 'org', check http://vimregex.com/
-  if l:package =~  '^\([a-z]\+\.\)\+[a-z]*\(\.[a-z]\+\|[a-z]\+\)$' || l:package =~ '^[a-z]\+$'
+  if l:package =~  '^\(\w\+\.\)\+\w*\(\.\w\+\|\w\+\)$'|| l:package =~ '^\w\+$'
     return l:package
   endif
 
